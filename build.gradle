@@ -1,0 +1,37 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+        maven {
+            //           url "http://mvnrepo.alibaba-inc.com/mvn/repository"
+            url "http://maven.aliyun.com/nexus/content/groups/public"
+        }
+
+    }
+    dependencies {
+        classpath "com.taobao.android:atlasplugin:2.3.3.rc41"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+ext {
+    lib_atlas_core = "com.taobao.android:atlas_core:5.0.7.55@aar"
+    lib_atlas_update = "com.taobao.android:atlasupdate:1.1.4.14@aar"
+}
+allprojects {
+    repositories {
+        mavenLocal()
+        jcenter()
+        maven {
+            //           url "http://mvnrepo.alibaba-inc.com/mvn/repository"
+            url "http://maven.aliyun.com/nexus/content/groups/public"
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

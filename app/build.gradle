@@ -1,0 +1,72 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.taobao.atlas'//依赖atlas-pulgin组件
+apply plugin: 'com.taobao.atlas.dexpatch'
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
+    defaultConfig {
+        applicationId "com.atlas.analysis"
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            ndk {
+                abiFilters "x86","armeabi"
+            }
+
+        }
+
+    }
+}
+def apVersion = getEnvValue("apVersion", "");
+atlas {
+
+    atlasEnabled true
+    tBuildConfig {
+        autoStartBundles = ['com.taobao.firstbundle'] //自启动bundle配置
+    }
+    patchConfigs {
+        debug {
+            createTPatch true
+        }
+    }
+    manifestOptions {
+        addAtlasProxyComponents true
+    }
+    buildTypes {
+        debug {
+            if (apVersion) {
+                baseApDependency "com.taobao.android.atlasdemo:AP-debug:${apVersion}@ap"
+                patchConfig patchConfigs.debug
+            }
+        }
+    }
+}
+
+String getEnvValue(key, defValue) {
+    def val = System.getProperty(key);
+    if (null != val) {
+        return val;
+    }
+    val = System.getenv(key);
+    if (null != val) {
+        return val;
+    }
+    return defValue;
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:25.+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile rootProject.ext.lib_atlas_core//依赖atlas-core引擎代码组件
+    compile rootProject.ext.lib_atlas_update//依赖atlas-update更新代码组件
+    bundleCompile project(':firstbundle')
+}
