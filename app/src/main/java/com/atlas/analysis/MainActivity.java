@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    private ActivityGroupDelegate mActivityDelegate;
     private ViewGroup mActivityGroupContainer;
     private Context context;
 
@@ -19,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         context = MainActivity.this;
         TextView textView = (TextView) findViewById(R.id.textView);
-        mActivityDelegate = new ActivityGroupDelegate(this, savedInstanceState);
         mActivityGroupContainer = (ViewGroup) findViewById(R.id.frame);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,11 +29,5 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void switchToActivity(String key, String activityName) {
-        Intent intent = new Intent();
-        intent.setClassName(getBaseContext(), activityName);
-        mActivityDelegate.startChildActivity(mActivityGroupContainer, key, intent);
-
-    }
 
 }
