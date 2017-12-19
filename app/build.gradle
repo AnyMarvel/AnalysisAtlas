@@ -30,7 +30,9 @@ atlas {
 
     atlasEnabled true
     tBuildConfig {
-        autoStartBundles = ['com.taobao.firstbundle'] //自启动bundle配置
+//        autoStartBundles = ['com.taobao.firstbundle'] //自启动bundle配置
+        preLaunch = 'com.atlas.analysis.AtlasLaunch' //AppApplication启动之前调用
+
     }
     patchConfigs {
         debug {
