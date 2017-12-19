@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.taobao.atlas'
 
 atlas {
-    bundleConfig {
+    bundleConfig{
         awbBundle true
     }
     buildTypes {
@@ -11,7 +11,7 @@ atlas {
         }
     }
 }
-
+//只添加上面的配置就行了，下面的是默认生成的
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
@@ -35,8 +35,4 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:25.+'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0'
-    providedCompile 'com.android.support:support-v4:25.3.0'
-    providedCompile 'com.android.support:appcompat-v7:25.1.0'
-    providedCompile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
 }
